@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { supabase } from './supabaseClient';
+
 
 const SignUpForUpdates: NextComponentType = () => {
 	const [firstName, setFirstName] = useState('')
@@ -21,9 +23,15 @@ const SignUpForUpdates: NextComponentType = () => {
     setEmail(event.target.value);
   };
 
-	const handleClick = () => {
-		console.log(firstName, lastName, email)
+	const test = async () => {
+		console.log('test')
+		return await supabase.from('email_sign_ups').insert({email: 'test@test.com'})
 	}
+	const handleClick = async () => {
+		const res = await test()
+		console.log('res', res)
+	}
+
 
 
 
