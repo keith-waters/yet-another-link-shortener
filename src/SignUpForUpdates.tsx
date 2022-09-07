@@ -10,6 +10,10 @@ const SignUpForUpdates: NextComponentType = () => {
 	const [firstName, setFirstName] = useState('')
 	const [lastName, setLastName] = useState('')
 	const [email, setEmail] = useState('')
+	const [emailError, setEmailError] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
+	const [showStatus, setShowStatus] = useState(false)
+	const [statusMessage, setStatusMessage] = useState("Thanks for signing up! I'll be in touch with updates soon.")
 
 	const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(event.target.value);
@@ -20,12 +24,24 @@ const SignUpForUpdates: NextComponentType = () => {
   };
 
 	const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setEmailError(false)
     setEmail(event.target.value);
   };
 
 	const handleClick = async () => {
+		if(!email) {
+			setEmailError(true)
+			return
+		}
+		setIsLoading(true)
 		const res = await supabase.from('email_sign_ups').insert({firstName, lastName, email})
-		console.log('res', res)
+		if(res.status === 201) {
+			setShowStatus(true)
+		} else if(res.error) {
+			setStatusMessage("Thats odd. Something went wrong. I'm taking a look at it now.")
+			setShowStatus(true)
+		}
+		setIsLoading(false)
 	}
 
 
@@ -36,10 +52,11 @@ const SignUpForUpdates: NextComponentType = () => {
 			<Typography variant="h3" component="h2">
 				Sign up for updates
 			</Typography>
-			<TextField style={{margin: '10px', width: '300px'}} required label='First Name' value={firstName} onChange={handleFirstNameChange}/>
-			<TextField style={{margin: '10px', width: '300px'}} required label='Last Name' value={lastName} onChange={handleLastNameChange}/>
-			<TextField style={{margin: '10px', width: '300px'}} required label='Email' value={email} onChange={handleEmailChange}/>
-			<Button type='submit' variant="contained" onClick={handleClick}>Sign me up!</Button>
+			<TextField disabled={showStatus} style={{margin: '10px', width: '300px'}} label='First Name' value={firstName} onChange={handleFirstNameChange}/>
+			<TextField disabled={showStatus} style={{margin: '10px', width: '300px'}} label='Last Name' value={lastName} onChange={handleLastNameChange}/>
+			<TextField disabled={showStatus} style={{margin: '10px', width: '300px'}} error={emailError} required label='Email' value={email} onChange={handleEmailChange}/>
+			<Button disabled={isLoading || showStatus} type='submit' variant="contained" onClick={handleClick}>Sign me up!</Button>
+			{ showStatus && <Typography component="p">{statusMessage}</Typography> }
 		</>
 	)
 }
