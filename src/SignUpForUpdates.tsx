@@ -23,12 +23,8 @@ const SignUpForUpdates: NextComponentType = () => {
     setEmail(event.target.value);
   };
 
-	const test = async () => {
-		console.log('test')
-		return await supabase.from('email_sign_ups').insert({email: 'test@test.com'})
-	}
 	const handleClick = async () => {
-		const res = await test()
+		const res = await supabase.from('email_sign_ups').insert({firstName, lastName, email})
 		console.log('res', res)
 	}
 
