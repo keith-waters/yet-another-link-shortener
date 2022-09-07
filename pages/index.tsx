@@ -92,7 +92,7 @@ const Home: NextPage = () => {
 						component="p"
 						style={{margin: "10px"}}
 					>
-						Hi, I'm Keith. I'm that guy :), and the only person that works on YALS currently. So, any ideas, questions, comments, or concerns go directly to me.
+						Hi, I'm Keith. I'm the only person that works on YALS. So, any ideas, questions, comments, or concerns go directly to me.
 					</Typography>
 				</Box>
 
