@@ -18,6 +18,7 @@
     "@mui/material": "latest",
     "@supabase/supabase-js": "^1.35.6",
     "next": "latest",
+    "next-plausible": "^3.5.0",
     "react": "latest",
     "react-dom": "latest"
   },
