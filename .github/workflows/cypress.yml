@@ -42,7 +42,9 @@ jobs:
           supabase db push
   deploy_to_app_platform:
     needs: [deploy]
-    uses: digitalocean/app_action@main
-    with:
-      app_name: staging-yals 
-      token: ${{ secrets.STAGING_DIGITALOCEAN_ACCESS_TOKEN }}
+    steps:
+      - name: DigitalOcean App Platform staging deployment
+        uses: digitalocean/app_action@main
+        with:
+          app_name: staging-yals 
+          token: ${{ secrets.STAGING_DIGITALOCEAN_ACCESS_TOKEN }}
