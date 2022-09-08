@@ -40,9 +40,7 @@ jobs:
       - run: |
           supabase link --project-ref $STAGING_SUPABASE_PROJECT_ID
           supabase db push
-  deploy_to_app_platform:
-    needs: [deploy]
-    steps:
+
       - name: DigitalOcean App Platform staging deployment
         uses: digitalocean/app_action@main
         with:
