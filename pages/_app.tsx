@@ -17,7 +17,7 @@ interface MyAppProps extends AppProps {
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
-		<PlausibleProvider domain={process.env.NEXT_DOMAIN}>
+		<PlausibleProvider domain={process.env.NEXT_DOMAIN || ''}>
 			<CacheProvider value={emotionCache}>
 				<Head>
 					<meta name="viewport" content="initial-scale=1, width=device-width" />
