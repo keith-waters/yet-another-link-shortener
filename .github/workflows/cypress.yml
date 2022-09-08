@@ -3,7 +3,6 @@ name: Cypress Tests
 on: 
   push:
     branches:
-      - main
       - develop
 
 jobs:
@@ -22,3 +21,21 @@ jobs:
         with:
           build: npm run build
           start: npm start
+  deploy:
+    runs-on: ubuntu-22.04
+
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      STAGING_SUPABASE_DB_PASSWORD: ${{ secrets.STAGING_SUPABASE_DB_PASSWORD }}
+      STAGING_SUPABASE_PROJECT_ID: ${{ secrets.STAGING_SUPABASE_PROJECT_ID }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 1.0.0
+
+      - run: |
+          supabase link --project-ref $STAGING_PROJECT_ID
+          supabase db push
