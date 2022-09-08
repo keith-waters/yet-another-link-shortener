@@ -22,6 +22,7 @@ jobs:
           build: npm run build
           start: npm start
   deploy:
+    needs: [cypress-run]
     runs-on: ubuntu-22.04
 
     env:
@@ -37,5 +38,5 @@ jobs:
           version: 1.0.0
 
       - run: |
-          supabase link --project-ref $STAGING_PROJECT_ID
+          supabase link --project-ref $STAGING_SUPABASE_PROJECT_ID
           supabase db push
