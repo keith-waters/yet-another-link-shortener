@@ -44,5 +44,5 @@ jobs:
       - name: DigitalOcean App Platform staging deployment
         uses: digitalocean/app_action@main
         with:
-          app_name: staging-yals 
+          app_name: production-yals 
           token: ${{ secrets.STAGING_DIGITALOCEAN_ACCESS_TOKEN }}
