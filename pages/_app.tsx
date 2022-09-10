@@ -16,7 +16,7 @@ interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-	console.log('process.env.NEXT_PUBLIC_DOMAIN', process.env.NEXT_PUBLIC_DOMAIN)
+	console.log( 'process.env.NEXT_PUBLIC_DOMAIN', process.env.NEXT_PUBLIC_DOMAIN)
 	return (
 		<PlausibleProvider domain={process.env.NEXT_PUBLIC_DOMAIN || ''}>
 			<CacheProvider value={emotionCache}>
