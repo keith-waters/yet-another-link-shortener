@@ -6,21 +6,21 @@ on:
       - develop
 
 jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v4 # use the explicit version number
-        env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_URL}}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY}}
-        with:
-          build: npm run build
-          start: npm start
+  #  cypress-run:
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - name: Checkout
+  #        uses: actions/checkout@v2
+  #      # Install NPM dependencies, cache them correctly
+  #      # and run all Cypress tests
+  #      - name: Cypress run
+  #        uses: cypress-io/github-action@v4 # use the explicit version number
+  #        env:
+  #          NEXT_PUBLIC_SUPABASE_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_URL}}
+  #          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY}}
+  #        with:
+  #          build: npm run build
+  #          start: npm start
   deploy:
     needs: [cypress-run]
     runs-on: ubuntu-22.04
