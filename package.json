@@ -18,6 +18,7 @@
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
     "@supabase/supabase-js": "^1.35.6",
+    "@supabase/ui": "^0.36.5",
     "next": "latest",
     "next-plausible": "^3.5.0",
     "react": "latest",
