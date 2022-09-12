@@ -1,9 +1,8 @@
 import type { NextPage } from 'next';
-import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Copyright from '../src/Copyright';
 import SignUpForUpdates from '../src/SignUpForUpdates';
+import Layout from '../src/Layout';
 import { supabase } from '../src/supabaseClient';
 import { Auth, Button } from '@supabase/ui'
 
@@ -20,7 +19,7 @@ const Cont = () => {
 }
 const Home: NextPage = () => {
   return (
-    <Container maxWidth="sm">
+    <Layout>
 			<Auth.UserContextProvider supabaseClient={supabase}>
 				<Auth supabaseClient={supabase}/>
 				<Cont />
@@ -118,9 +117,8 @@ const Home: NextPage = () => {
 
 				<SignUpForUpdates />
 
-        <Copyright />
       </Box>
-    </Container>
+    </Layout>
 
   );
 };
