@@ -4,7 +4,7 @@ import Layout from "../../src/Layout";
 import { Auth } from "@supabase/ui";
 import { useRouter } from 'next/router';
 
-const Dashboard: NextPage = () => {
+const Profile: NextPage = () => {
   const { user } = Auth.useUser();
 	const router = useRouter()
 
@@ -14,9 +14,9 @@ const Dashboard: NextPage = () => {
 
   return (
     <Layout>
-			<p> its' a dashboard</p>
+			<p> its' a profile page :)</p>
     </Layout>
   );
 };
 
-export default Dashboard;
+export default Profile;
