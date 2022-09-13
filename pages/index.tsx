@@ -3,30 +3,10 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import SignUpForUpdates from '../src/SignUpForUpdates';
 import Layout from '../src/Layout';
-import { supabase } from '../src/supabaseClient';
-import { Auth, Button } from '@supabase/ui'
 
-
-const Cont = () => {
-	const { user } = Auth.useUser()
-	return (
-		<button 
-			onClick={() => console.log('user', user)}
-		> 
-			sho me
-		</button>
-	)
-}
 const Home: NextPage = () => {
   return (
     <Layout>
-			<Auth.UserContextProvider supabaseClient={supabase}>
-				<Auth supabaseClient={supabase}/>
-				<Cont />
-			</Auth.UserContextProvider>
-			<Button onClick={() => supabase.auth.signOut()}>
-          Sign out
-      </Button>
       <Box
         sx={{
           my: 4,
