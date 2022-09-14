@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
 import type { NextPage } from "next";
 import Layout from "../../src/Layout";
-import { Auth } from "@supabase/ui";
 import { useRouter } from 'next/router';
+import { useAuth } from '../../src/AuthContext'
 
 const Dashboard: NextPage = () => {
-  const { user } = Auth.useUser();
+  const session = useAuth();
 	const router = useRouter()
 
 	useEffect(() => {
-		if(!user) router.push('/')
-	}, [user])
+		if(!session) router.push('/')
+	}, [session])
 
   return (
     <Layout>

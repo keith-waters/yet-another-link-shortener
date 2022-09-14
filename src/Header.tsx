@@ -6,13 +6,13 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
-import { Auth } from "@supabase/ui";
 import { supabase } from "../src/supabaseClient";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useAuth } from '../src/AuthContext'
 
 export default function Header() {
-  const { user } = Auth.useUser();
+  const session = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -33,7 +33,7 @@ export default function Header() {
             style={{ borderRadius: "3px" }}
           />
         </Box>
-        {!user && (
+        {!session && (
           <Link href="/auth">
             <Button color="inherit">Sign up</Button>
           </Link>
@@ -67,7 +67,7 @@ export default function Header() {
 						<Link href="/dashboard">
 							<MenuItem color="inherit">Dashboard</MenuItem>
 						</Link>
-            {user ? (
+            {session ? (
               <MenuItem onClick={() => supabase.auth.signOut()}>
                 Logout
               </MenuItem>
