@@ -20,7 +20,7 @@ function useAuth() {
 		if (event == 'SIGNED_OUT') context.setAuth(session)
 		
 	})
-	return context.auth
+	return context.auth || {}
 }
 
 export { AuthContextProvider, useAuth };

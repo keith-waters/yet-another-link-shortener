@@ -5,33 +5,28 @@ import { supabase } from "../src/supabaseClient";
 import { useRouter } from "next/router";
 
 import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import VisibilityOutlined from "@mui/icons-material/VisibilityOutlined";
-import VisibilityOffOutlined from "@mui/icons-material/VisibilityOffOutlined";
 import { useAuth } from '../src/AuthContext'
 
-const Login: NextPage = () => {
+const PasswordReset: NextPage = () => {
   const defaultLoginFields = {
     email: "",
-    password: "",
   };
   const [fields, setFields] = useState(defaultLoginFields);
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
 	const [message, setMessage] = useState('')
   const session = useAuth();
   const router = useRouter();
 
   useEffect(() => {
+	console.log(Object.keys(session).length)
     if (Object.keys(session).length > 0) router.push("/dashboard");
   }, [session]);
 
-  const handleLogin = async () => {
-    const { error } = await supabase.auth.signIn({
-      email: fields.email,
-      password: fields.password,
-    });
+  const handlePasswordReset = async () => {
+    const { error } = await supabase.auth.api.resetPasswordForEmail(
+      fields.email
+    );
 
 		if(error) setMessage(error.message)
   };
@@ -55,39 +50,15 @@ const Login: NextPage = () => {
         value={fields.email}
         onChange={handleInputChange}
       />
-      <TextField
-        disabled={false}
-        style={{ margin: "10px", width: "300px" }}
-        name="password"
-        type={passwordVisibility ? "text" : "password"}
-        label="Password"
-        value={fields.password}
-        onChange={handleInputChange}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Button
-                onClick={() => setPasswordVisibility(!passwordVisibility)}
-              >
-                {passwordVisibility ? (
-                  <VisibilityOffOutlined />
-                ) : (
-                  <VisibilityOutlined />
-                )}
-              </Button>
-            </InputAdornment>
-          ),
-        }}
-      />
 			<Button
 				type="submit"
-				onClick={handleLogin}
+				onClick={handlePasswordReset}
 			>
-				Login	
+				Reset password	
 			</Button>
 			<Typography color={message ? 'red' : 'green'}>{message}</Typography>
     </Layout>
   );
 };
 
-export default Login;
+export default PasswordReset;

@@ -9,7 +9,7 @@ const Profile: NextPage = () => {
 	const router = useRouter()
 
 	useEffect(() => {
-		if(!session) router.push('/')
+		if(Object.keys(session).length === 0) router.push('/')
 	}, [session])
 
   return (

@@ -13,6 +13,8 @@ import { useAuth } from '../src/AuthContext'
 
 export default function Header() {
   const session = useAuth();
+
+	const userLoggedOut = Object.keys(session).length === 0
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -33,7 +35,7 @@ export default function Header() {
             style={{ borderRadius: "3px" }}
           />
         </Box>
-        {!session && (
+        {userLoggedOut && (
           <Link href="/sign_up">
             <Button color="inherit">Sign up</Button>
           </Link>
@@ -67,7 +69,7 @@ export default function Header() {
 						<Link href="/dashboard">
 							<MenuItem color="inherit">Dashboard</MenuItem>
 						</Link>
-            {session ? (
+            {!userLoggedOut ? (
               <MenuItem onClick={() => supabase.auth.signOut()}>
                 Logout
               </MenuItem>
