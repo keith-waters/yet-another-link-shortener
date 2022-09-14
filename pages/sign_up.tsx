@@ -12,7 +12,7 @@ import VisibilityOutlined from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlined from "@mui/icons-material/VisibilityOffOutlined";
 import { useAuth } from '../src/AuthContext'
 
-const AuthPage: NextPage = () => {
+const SignUp: NextPage = () => {
   const defaultSignUpFields = {
     firstName: "",
     email: "",
@@ -100,4 +100,4 @@ const AuthPage: NextPage = () => {
   );
 };
 
-export default AuthPage;
+export default SignUp;

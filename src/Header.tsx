@@ -34,7 +34,7 @@ export default function Header() {
           />
         </Box>
         {!session && (
-          <Link href="/auth">
+          <Link href="/sign_up">
             <Button color="inherit">Sign up</Button>
           </Link>
         )}
@@ -72,7 +72,7 @@ export default function Header() {
                 Logout
               </MenuItem>
             ) : (
-              <Link href="/auth">
+              <Link href="/login">
                 <MenuItem color="inherit">Login</MenuItem>
               </Link>
             )}
