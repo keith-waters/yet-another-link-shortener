@@ -1,7 +1,13 @@
-import { createContext, useState, useContext, ReactNode } from "react";
+import { createContext, useState, useContext, ReactNode, Dispatch } from "react";
 import { supabase } from './supabaseClient'
+import { Session } from '@supabase/supabase-js'
 
-const AuthContext = createContext({});
+interface ContextState {
+	setAuth: Dispatch<Session>,
+	auth: object,
+}
+
+const AuthContext = createContext<ContextState | null>(null);
 
 interface Props {
   children?: ReactNode;
@@ -15,7 +21,9 @@ function AuthContextProvider({ children }:Props) {
 
 function useAuth() {
   const context = useContext(AuthContext);
+	if(!context) return {}
 	supabase.auth.onAuthStateChange((event, session) => {
+		if(!session) return
 		if (event == 'SIGNED_IN') context.setAuth(session)
 		if (event == 'SIGNED_OUT') context.setAuth(session)
 		
