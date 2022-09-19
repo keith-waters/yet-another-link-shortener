@@ -25,7 +25,7 @@ const SignUp: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (session) router.push("/dashboard");
+    if (Object.keys(session).length > 0) router.push("/dashboard");
   }, [session]);
 
   const handleSignUp = async () => {
