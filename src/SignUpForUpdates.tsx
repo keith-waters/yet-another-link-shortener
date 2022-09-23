@@ -34,7 +34,7 @@ const SignUpForUpdates: NextComponentType = () => {
 			return
 		}
 		setIsLoading(true)
-		const res = await supabase.from('email_sign_ups').insert({firstName, lastName, email})
+		const res = await supabase().from('email_sign_ups').insert({firstName, lastName, email})
 		if(res.status === 201) {
 			setShowStatus(true)
 		} else if(res.error) {

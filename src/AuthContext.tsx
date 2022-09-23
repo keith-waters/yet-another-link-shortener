@@ -22,7 +22,7 @@ function AuthContextProvider({ children }:Props) {
 function useAuth() {
   const context = useContext(AuthContext);
 	if(!context) return {}
-	supabase.auth.onAuthStateChange((event, session) => {
+	supabase().auth.onAuthStateChange((event, session) => {
 		if(!session) return
 		if (event == 'SIGNED_IN') context.setAuth(session)
 		if (event == 'SIGNED_OUT') context.setAuth(session)

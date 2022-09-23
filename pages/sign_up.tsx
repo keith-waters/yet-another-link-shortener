@@ -29,7 +29,7 @@ const SignUp: NextPage = () => {
   }, [session]);
 
   const handleSignUp = async () => {
-    const { error } = await supabase.auth.signUp({
+    const { error } = await supabase().auth.signUp({
       email: fields.email,
       password: fields.password,
     });
@@ -93,7 +93,7 @@ const SignUp: NextPage = () => {
 				type="submit"
 				onClick={handleSignUp}
 			>
-				Sign up
+				Submit
 			</Button>
 			<Typography color={message ? 'red' : 'green'}>{message}</Typography>
     </Layout>
