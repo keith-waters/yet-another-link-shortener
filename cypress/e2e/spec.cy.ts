@@ -25,4 +25,18 @@ describe('Landing page', () => {
 		cy.contains('Submit').click()
 		cy.contains("its' a dashboard").should('exist')
 	})
+
+	it('can log out after signing up', () => {
+    cy.visit('localhost:3000')
+		cy.contains('Sign up').click()
+		cy.get('[name="firstName"]').type('Test')
+		cy.get('[name="email"]').type('test@test.com')
+		cy.get('[name="password"]').type('testtest')
+		cy.contains('Submit').click()
+		cy.contains("its' a dashboard").should('exist')
+		cy.get('[data-testid="MenuIcon"]').click()
+		cy.contains('Logout').click()
+		cy.contains("its' a dashboard").should('not.exist')
+		cy.contains("Yet Another Link Shortener").should('exist')
+	})
 })
