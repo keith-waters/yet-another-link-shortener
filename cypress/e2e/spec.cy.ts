@@ -1,11 +1,14 @@
-import { supabase } from '../../src/supabaseClient'
+import { supabaseWithConnectionParams } from '../../src/supabaseClientWithConnectionParams'
 
 describe('Landing page', () => {
-	afterEach(async () => {
-		const sb = supabase(Cypress.env('NEXT_PUBLIC_SUPABASE_URL'), Cypress.env('NEXT_PUBLIC_SUPABASE_ANON_KEY'))
-		const { data, error } = await sb.auth.api.listUsers()
+	beforeEach(async () => {
+		const sb = supabaseWithConnectionParams(Cypress.env('NEXT_PUBLIC_SUPABASE_URL'), Cypress.env('NEXT_PUBLIC_SUPABASE_ANON_KEY'))
+		 const { data, error } = await sb.auth.api.listUsers()
+		 if(error) return
 
-		console.log('aorsitenarostn', data, error)
+ 		data?.forEach(user => {
+			sb.auth.api.deleteUser(user.id)
+		})
 
 	})
 

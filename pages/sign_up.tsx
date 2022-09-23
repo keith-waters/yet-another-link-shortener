@@ -28,8 +28,9 @@ const SignUp: NextPage = () => {
     if (Object.keys(session).length > 0) router.push("/dashboard");
   }, [session]);
 
+
   const handleSignUp = async () => {
-    const { error } = await supabase().auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: fields.email,
       password: fields.password,
     });

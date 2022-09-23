@@ -19,7 +19,6 @@ const PasswordReset: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-	console.log(Object.keys(session).length)
     if (Object.keys(session).length > 0) router.push("/dashboard");
   }, [session]);
 

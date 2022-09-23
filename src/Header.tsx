@@ -70,7 +70,7 @@ export default function Header() {
 							<MenuItem color="inherit">Dashboard</MenuItem>
 						</Link>
             {!userLoggedOut ? (
-              <MenuItem onClick={() => supabase().auth.signOut()}>
+              <MenuItem onClick={() => supabase.auth.signOut()}>
                 Logout
               </MenuItem>
             ) : (
