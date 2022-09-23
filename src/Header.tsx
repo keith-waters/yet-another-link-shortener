@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
@@ -10,11 +10,30 @@ import { supabase } from "../src/supabaseClient";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useAuth } from '../src/AuthContext'
+import { useRouter } from 'next/router'
 
 export default function Header() {
-  const session = useAuth();
+	const session = useAuth()
+	const router = useRouter()
+	const [userLoggedOut, setUserLoggedOut] = useState(true)
 
-	const userLoggedOut = Object.keys(session).length === 0
+	useEffect(() => {
+		if(Object.keys(session).length > 0) {
+			setUserLoggedOut(false)
+			console.log('sessino with lenght', userLoggedOut)
+		} else {
+			setUserLoggedOut(true)
+			console.log('no session', userLoggedOut)
+		}
+	}, [session])
+	console.log('OUTSIDE', userLoggedOut)
+
+	const handleLogout = () => {
+		supabase.auth.signOut()
+		router.push('/')
+		router.reload()
+	}
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -70,7 +89,7 @@ export default function Header() {
 							<MenuItem color="inherit">Dashboard</MenuItem>
 						</Link>
             {!userLoggedOut ? (
-              <MenuItem onClick={() => supabase.auth.signOut()}>
+              <MenuItem onClick={handleLogout}>
                 Logout
               </MenuItem>
             ) : (
