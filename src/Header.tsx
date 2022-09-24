@@ -20,13 +20,10 @@ export default function Header() {
 	useEffect(() => {
 		if(Object.keys(session).length > 0) {
 			setUserLoggedOut(false)
-			console.log('sessino with lenght', userLoggedOut)
 		} else {
 			setUserLoggedOut(true)
-			console.log('no session', userLoggedOut)
 		}
 	}, [session])
-	console.log('OUTSIDE', userLoggedOut)
 
 	const handleLogout = () => {
 		supabase.auth.signOut()
